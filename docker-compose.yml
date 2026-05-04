@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: ventas-ropa-postgres
+    environment:
+      POSTGRES_DB: sistema_ventas_ropa
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 'Jfrc11$$'
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d sistema_ventas_ropa"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sistema-ventas-ropa-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sistema_ventas_ropa
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 'Jfrc11$$'
+      JWT_SECRET: replace-this-secret-with-a-secure-256-bit-value
+      JWT_EXPIRATION_MS: 86400000
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
