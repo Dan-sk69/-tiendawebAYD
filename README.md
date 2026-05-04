@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Sistema de Ventas de Ropa
 
 Monorepo para el sistema de ventas de ropa.
