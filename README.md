@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Sistema de Ventas de Ropa
 
 Monorepo para el sistema de ventas de ropa.
@@ -69,3 +70,6 @@ docker compose up --build
 ```
 
 Esto levanta PostgreSQL 17 y construye el backend desde `./backend`.
+=======
+# -tiendawebAYD
+>>>>>>> ae024f2f66ec9b7bd4f77b342afe8007e8d60a0d
